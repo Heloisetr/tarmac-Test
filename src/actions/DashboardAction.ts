@@ -1,4 +1,4 @@
-import { FlightsContentType } from 'types/DashboardFlightsType';
+import { FlightsContentType, ParamsContentType } from 'types/DashboardFlightsType';
 
 export type Action =
   | GET_REAL_TIME_FLIGHTS_ACTION
@@ -6,8 +6,9 @@ export type Action =
   | GET_REAL_TIME_FLIGHTS_FAILURE_ACTION;
 
 export const GET_REAL_TIME_FLIGHTS = 'GET_REAL_TIME_FLIGHTS';
-export const getRealTimeFlights = (): GET_REAL_TIME_FLIGHTS_ACTION => ({
+export const getRealTimeFlights = (paramsData: ParamsContentType): GET_REAL_TIME_FLIGHTS_ACTION => ({
   type: GET_REAL_TIME_FLIGHTS,
+  payload: paramsData,
 });
 
 export const GET_REAL_TIME_FLIGHTS_SUCCESS = 'GET_REAL_TIME_FLIGHTS_SUCCESS';
@@ -23,6 +24,7 @@ export const getRealTimeFlightsFailure = (): GET_REAL_TIME_FLIGHTS_FAILURE_ACTIO
 
 export interface GET_REAL_TIME_FLIGHTS_ACTION {
   type: typeof GET_REAL_TIME_FLIGHTS;
+  payload: ParamsContentType;
 }
 
 export interface GET_REAL_TIME_FLIGHTS_SUCCESS_ACTION {

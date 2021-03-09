@@ -1,0 +1,34 @@
+.flightCardContainer {
+  width: 100%;
+  border: solid 1px;
+  box-shadow:  0 0 10px  rgba(0,0,0,0.6);
+  -moz-box-shadow: 0 0 10px  rgba(0,0,0,0.6);
+  -webkit-box-shadow: 0 0 10px  rgba(0,0,0,0.6);
+  -o-box-shadow: 0 0 10px  rgba(0,0,0,0.6);
+  border-radius: 15px; 
+}
+.flightCardDestination {
+  text-align: center;
+  display: flex;
+  width: 75%;
+  margin-left: auto;
+}
+.flightCardPlace {
+  width: 25%;
+  margin-left: 5px;
+}
+.FlightCardImg {
+  height: 20px;
+  margin-left: 5px;
+  margin-top: 24px;
+}
+.FlightCardAirline {
+  margin-left: 20px;
+}
+.FlightCardScheduledTime {
+  text-align: center;
+}
+.FlightCardDepartureInfo {
+  text-align: right;
+  margin-right: 30px;
+}

@@ -4,6 +4,10 @@ import { withRouter, RouteComponentProps } from 'react-router-dom';
 import Status from 'types/StatusType';
 import { FlightsContentType } from 'types/DashboardFlightsType';
 
+import DashboardHeader from 'components/fragments/header/DashboardHeader';
+import FlightCard from 'components/fragments/flightCard/FlightCard';
+import Pagination from 'components/fragments/pagination/Pagination';
+
 import 'styles/DashboardFlights.css';
 
 export interface DispatchProps {
@@ -15,24 +19,47 @@ export interface StateProps {
   getFlightStatus: Status;
 }
 
+export interface State {
+  limit: number;
+  offset: number;
+}
+
 type Props = {} & DispatchProps & StateProps & RouteComponentProps;
 
-class DashboardFlights extends Component<Props> {
+class DashboardFlights extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      limit: 20,
+      offset: 20,
+    };
+  }
+
   componentDidMount() {
     const { getRealTimeFlights } = this.props;
+    const { limit } = this.state;
 
-    getRealTimeFlights();
+    getRealTimeFlights({ offset: 0, limit: limit });
   }
-  
+
+  sendParamsFlights = (pageNumber: number) => {
+    const { getRealTimeFlights } = this.props;
+    const { limit } = this.state;
+    
+    let countElementPage = (pageNumber - 1) * 20;
+
+    getRealTimeFlights({ offset: countElementPage, limit: limit });
+  }
+
+
   displayData = () => {
     const { flightsData } = this.props;
-    console.log(flightsData);
+
     return (
       flightsData.map((flight: FlightsContentType, index) => {
         return (
-          <div key={index}>
-            <p>{flight.departure.airport}</p>
-            <p>{flight.departure.scheduled}</p>
+          <div key={index} className="DashboardCardContainer">
+            <FlightCard flightData={flight} />
           </div>
         );
       })
@@ -42,7 +69,13 @@ class DashboardFlights extends Component<Props> {
   render() {
     return (
       <div>
-        {this.displayData()}
+        <DashboardHeader />
+        <div className="DashboardFlightsContainer">
+          <div className="DashboardFlightCard">
+            {this.displayData()}
+          </div>
+        </div>
+        <Pagination limit={10} sendParamsFlights={this.sendParamsFlights}/>
       </div>
     );
   }
