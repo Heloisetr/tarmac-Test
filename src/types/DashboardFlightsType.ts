@@ -22,3 +22,8 @@ export interface ArrivalDataType {
   "airport": string;
   "iata": string;
 }
+
+export interface ParamsContentType {
+  "offset": number;
+  "limit": number;
+}
