@@ -58,7 +58,7 @@ function* getCarriersFunction() {
 function* getAirportsFunction() {
   try {
     const { data, status } = yield call(DashboardApi.getAirports);
-    console.log(data);
+
     if (status === 200) {
       yield put(getAirportsSuccess(getAirportsData(data.data)));
     } else {
