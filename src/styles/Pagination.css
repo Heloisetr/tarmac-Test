@@ -24,7 +24,8 @@
   margin-right: 8px;
   color: #2d2d2d;
   background: #f7f7f7;
+  border-radius: 20px;
 }
 .current {
-  background-color: aquamarine;
+  background-color: #01CBB1;
 }
