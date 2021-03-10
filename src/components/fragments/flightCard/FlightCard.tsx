@@ -11,6 +11,22 @@ interface Props {
 }
 
 class FlightCard extends PureComponent<Props> {
+
+  setStatusColor = (flightStatus: string) => {
+    switch(flightStatus) {
+      case 'cancelled':
+        return "red";
+      case 'scheduled':
+        return "orange";
+      case 'landed':
+        return "blue";
+      case 'active':
+        return "green";
+      default:
+        return "grey";
+    }
+  }
+  
   render() {
     const { flightData } = this.props;
 
@@ -23,23 +39,27 @@ class FlightCard extends PureComponent<Props> {
         </div>
         <div className="FlightCardScheduledTime">
           <p>{flightData.departure.scheduled.substr(0, 10)} at {flightData.departure.scheduled.substring(11, 16)}</p>
+          <p style={{color: `${this.setStatusColor(flightData.flight_status)}`}}>
+            {flightData.flight_status !== null && flightData.flight_status.toUpperCase()}
+          </p>
         </div>
         <div className="FlightCardAirline">
           <p>Airline: <strong>{flightData.airline.name}</strong></p>
-          <p>Flight no. : {flightData.flight.number}</p>
+          <p>Flight no. : {flightData.flight.iata}</p>
         </div>
         <div className="FlightCardDepartureInfo">
-          {flightData.departure.terminal === null ? (
-            <p>Term : <strong>-</strong></p>
-          ) : 
-          (<p>Term : <strong>{flightData.departure.terminal}</strong></p>)
-          }
-          {flightData.departure.gate === null ? (
-            <p>Gate : <strong>-</strong></p>
-          ) : 
-          (<p>Gate : <strong>{flightData.departure.gate}</strong></p>)
-          }
-        </div>
+          <img src={`https://daisycon.io/images/airline/?width=300&height=150&color=ffffff&iata=${flightData.airline.iata}`} alt={flightData.airline.name} className="FlightCardLogo"/>
+            {flightData.departure.terminal === null ? (
+              <p>Term : <strong>-</strong></p>
+            ) : 
+            (<p>Term : <strong>{flightData.departure.terminal}</strong></p>)
+            }
+            {flightData.departure.gate === null ? (
+              <p>Gate : <strong>-</strong></p>
+            ) : 
+            (<p>Gate : <strong>{flightData.departure.gate}</strong></p>)
+            }
+          </div>
       </div>
     );
   }

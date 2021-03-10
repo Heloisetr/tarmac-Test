@@ -18,6 +18,7 @@ class Pagination extends Component<Props, State> {
       actualPage: 1,
     }
   }
+
   calcLimitPage() {
     const { limit } = this.props;
     const pageNumber: number[] = [];

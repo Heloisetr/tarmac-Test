@@ -32,3 +32,8 @@
   text-align: right;
   margin-right: 30px;
 }
+.FlightCardLogo {
+  width: 42%;
+  float: left;
+  margin-left: 30px;
+}
