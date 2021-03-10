@@ -8,7 +8,8 @@ import { FlightsContentType } from 'types/DashboardFlightsType';
 import DashboardHeader from 'components/fragments/header/DashboardHeader';
 import FlightCard from 'components/fragments/flightCard/FlightCard';
 import Pagination from 'components/fragments/pagination/Pagination';
-import Button from 'components/fragments/buttons/Button';
+
+import Filter from 'assets/filter.png';
 
 import 'styles/DashboardFlights.css';
 
@@ -33,6 +34,7 @@ export interface State {
   airline: string;
   requestValue: string;
   iataCode: string;
+  filterIsOpen: boolean;
 }
 
 type Props = {} & DispatchProps & StateProps & RouteComponentProps;
@@ -46,6 +48,7 @@ class DashboardFlights extends Component<Props, State> {
       airline: '',
       requestValue: '',
       iataCode: '',
+      filterIsOpen: false,
     };
   }
 
@@ -108,6 +111,7 @@ class DashboardFlights extends Component<Props, State> {
     const { offset, limit, iataCode } = this.state;
     
     getRealTimeFlights({ offset: offset, limit: limit, dep_iata: iataCode });
+
   }
 
   handleChangeAirport = (event: ChangeEvent<HTMLInputElement>) => {
@@ -119,8 +123,8 @@ class DashboardFlights extends Component<Props, State> {
   renderWhichRequestSelect() {
     const { requestValue } = this.state;
     return (
-      <div className="DataToolsAdminRequestBar">
-        <select value={requestValue} onChange={this.handleChangeRequest}>
+      <div className="DashboardFlightsRequestBar">
+        <select className="DashboardFlightsSelect" value={requestValue} onChange={this.handleChangeRequest}>
           <option value="">Choose your filters</option>
           <option value="airline">Carriers</option>
           <option value="airport">Depart Airports</option>
@@ -170,8 +174,8 @@ class DashboardFlights extends Component<Props, State> {
             onChange={this.handleChangeAirline}
           />
         </Hint>
-        <div className="DataToolsAdminSubmit">
-          <Button type="submit" text="Rechercher" />
+        <div className="DashboardFlightsButtonSubmitContainer">
+          <button className="DashboardFlightsButtonSubmit" type="submit">Search</button>
         </div>
       </div>
     );
@@ -189,26 +193,40 @@ class DashboardFlights extends Component<Props, State> {
             onChange={this.handleChangeAirport}
           />
         </Hint>
-        <div className="DataToolsAdminSubmit">
-          <Button type="submit" text="Rechercher" />
+        <div className="DashboardFlightsButtonSubmitContainer">
+          <button className="DashboardFlightsButtonSubmit" type="submit">Search</button>
         </div>
       </div>
     );
   }
 
+  filterOpen = () => {
+    const { filterIsOpen } = this.state;
+
+    this.setState({ filterIsOpen: !filterIsOpen });
+  }
+
   render() {
+    const { filterIsOpen } = this.state;
+
     return (
       <div>
         <DashboardHeader />
         <div className="DashboardFlightsContainer">
-          <form onSubmit={this.sendRequest}>
-            <div>
-              <div>
-              {this.renderWhichRequestSelect()}
-              {this.renderOptionSelect()}
+          <div className="DashboardFlightsFilterActivation" onClick={() => {this.filterOpen()}}>
+            <img className="DashboardFlightsFilterImg" src={Filter} alt="filter"/>
+            <p className="DashboardFlightsFilterName">All filters</p>
+          </div>
+          { filterIsOpen && (
+            <form onSubmit={this.sendRequest}>
+              <div className="DashboardFlightsFilterContainer">
+                <div className="DashboardFlightsFilterBar">
+                {this.renderWhichRequestSelect()}
+                {this.renderOptionSelect()}
+                </div>
               </div>
-            </div>
           </form>
+          )}
           <div className="DashboardFlightCard">
             {this.displayData()}
           </div>
