@@ -1,0 +1,69 @@
+[{
+  "flight_date": "2021-03-12",
+  "flight_status": "scheduled",
+  "departure": {
+    "airport": "Adisutjipto",
+    "iata": "JOG",
+    "terminal": null,
+    "gate": null,
+    "scheduled": "2021-03-12T07:00:00+00:00"
+  },
+  "arrival": {
+    "airport": "Pangkalanbuun",
+    "iata": "PKN"
+  },
+  "airline": {
+    "name": "Xpressair",
+    "iata": "XN"
+  },
+  "flight": {
+    "number": "987",
+    "iata": "XN987"
+  }
+},
+{
+  "flight_date": "2021-03-12",
+  "flight_status": "scheduled",
+  "departure": {
+    "airport": "Adisutjipto",
+    "iata": "JOG",
+    "terminal": null,
+    "gate": null,
+    "scheduled": "2021-03-12T08:10:00+00:00"
+  },
+  "arrival": {
+    "airport": "Pangkalanbuun",
+    "iata": "PKN"
+  },
+  "airline": {
+    "name": "Xpressair",
+    "iata": "XN"
+  },
+  "flight": {
+    "number": "987",
+    "iata": "XN987"
+  }
+},
+{
+  "flight_date": "2021-03-12",
+  "flight_status": "scheduled",
+  "departure": {
+    "airport": "Adisutjipto",
+    "iata": "JOG",
+    "terminal": null,
+    "gate": null,
+    "scheduled": "2021-03-12T04:20:00+00:00"
+  },
+  "arrival": {
+    "airport": "Pangkalanbuun",
+    "iata": "PKN"
+  },
+  "airline": {
+    "name": "Xpressair",
+    "iata": "XN"
+  },
+  "flight": {
+    "number": "987",
+    "iata": "XN987"
+  }
+}]
