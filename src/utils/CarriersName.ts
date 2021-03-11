@@ -2,8 +2,9 @@ function getCarriersName(airlinesData: any[]): string[] {
   let airlinesName: string[] = [];
 
   airlinesData.map((name) => {
-    airlinesName.push(name.airline_name);
-    
+    if (name.airline_name) {
+      airlinesName.push(name.airline_name);
+    }
     return null;
   });
 
