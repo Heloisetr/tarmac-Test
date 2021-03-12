@@ -103,7 +103,7 @@ class DashboardFlights extends Component<Props, State> {
   handleChangeAirline = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
-    this.setState({ airline: event.target.value });
+    this.setState({ airline: event.target.value, iataCode: '' });
   }
 
   sendAirport = () => {
@@ -117,7 +117,7 @@ class DashboardFlights extends Component<Props, State> {
   handleChangeAirport = (event: ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
-    this.setState({ iataCode: event.target.value});
+    this.setState({ iataCode: event.target.value, airline: ''});
   }
 
   renderWhichRequestSelect() {
