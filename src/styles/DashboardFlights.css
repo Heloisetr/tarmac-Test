@@ -128,3 +128,7 @@
   margin-right: auto;
   font-family: sans-serif;
 }
+.DashboardFlightsLoading {
+  text-align: center;
+  width: 100%;
+}

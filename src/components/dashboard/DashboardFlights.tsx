@@ -164,16 +164,16 @@ class DashboardFlights extends Component<Props, State> {
 
   renderAirlinesSelect = () => {
     const { airline } = this.state;
-    const { airlinesName } = this.props;
+    const { airlinesName, getAirlinesStatus } = this.props;
 
     return (
       <div>
-        <Hint options={airlinesName} allowTabFill>
+        { getAirlinesStatus === Status.SUCCESS ? <Hint options={airlinesName} allowTabFill>
           <input className='input-with-hint'
             value={airline}
             onChange={this.handleChangeAirline}
           />
-        </Hint>
+        </Hint> : <p className="DashboardFlightsLoading">Loading</p>}
         <div className="DashboardFlightsButtonSubmitContainer">
           <button className="DashboardFlightsButtonSubmit" type="submit">Search</button>
         </div>
@@ -183,16 +183,16 @@ class DashboardFlights extends Component<Props, State> {
 
   renderAirportsSelect = () => {
     const { iataCode } = this.state;
-    const { airportsIata } = this.props;
+    const { airportsIata, getAirportsStatus } = this.props;
 
     return (
       <div>
-        <Hint options={airportsIata} allowTabFill>
+        {getAirportsStatus === Status.SUCCESS ? <Hint options={airportsIata} allowTabFill>
           <input className='input-with-hint'
             value={iataCode}
             onChange={this.handleChangeAirport}
           />
-        </Hint>
+        </Hint> : <p className="DashboardFlightsLoading">Loading</p> }
         <div className="DashboardFlightsButtonSubmitContainer">
           <button className="DashboardFlightsButtonSubmit" type="submit">Search</button>
         </div>
@@ -208,6 +208,7 @@ class DashboardFlights extends Component<Props, State> {
 
   render() {
     const { filterIsOpen } = this.state;
+    const { getFlightStatus } = this.props;
 
     return (
       <div>
@@ -228,7 +229,7 @@ class DashboardFlights extends Component<Props, State> {
           </form>
           )}
           <div className="DashboardFlightCard">
-            {this.displayData()}
+            {getFlightStatus !== Status.SUCCESS ? <p className="DashboardFlightsLoading">Loading</p> : this.displayData()}
           </div>
         </div>
         <Pagination limit={10} sendParamsFlights={this.sendParamsFlights}/>
